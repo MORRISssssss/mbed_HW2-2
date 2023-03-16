@@ -2,6 +2,7 @@
 
 PwmOut LED(D6);
 AnalogIn lightSensor(A0);
+AnalogOut  aout(PA_4);
 
 Thread LEDThread; 
 Thread sensorThread;
@@ -43,6 +44,7 @@ int main()
 {
     LEDThread.start(pwmLED);
     sensorThread.start(sensor);
-    while (true)
-        ;
+    while (true){
+        aout = lightSensor;;
+    }
 }
