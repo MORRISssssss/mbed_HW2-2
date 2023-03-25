@@ -6,6 +6,7 @@ AnalogOut aout(PA_4);
 
 Thread LEDThread; 
 Thread sensorThread;
+
 float sample[100];
 
 void pwmLED()
@@ -23,7 +24,7 @@ void pwmLED()
 void sensor()
 {
     while (true){
-        aout = lightSensor;
+        aout = lightSensor.read();
         ThisThread::sleep_for(1ms);
     }
 }
@@ -45,6 +46,6 @@ int main()
     sensorThread.start(sensor);
     while (true){
         printf("%f\n", lightSensor.read());
-        ThisThread::sleep_for(1ms);
+        ThisThread::sleep_for(10ms);
     }
 }
