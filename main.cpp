@@ -8,6 +8,7 @@ Thread LEDThread;
 Thread sensorThread;
 
 float sample[100];
+float sensorValue;
 
 void pwmLED()
 {
@@ -24,7 +25,8 @@ void pwmLED()
 void sensor()
 {
     while (true){
-        aout = lightSensor.read();
+        sensorValue = lightSensor.read();
+        aout = sensorValue;
         ThisThread::sleep_for(1ms);
     }
 }
@@ -45,7 +47,7 @@ int main()
     LEDThread.start(pwmLED);
     sensorThread.start(sensor);
     while (true){
-        printf("%f\n", lightSensor.read());
+        printf("%f\n", sensorValue);
         ThisThread::sleep_for(10ms);
     }
 }
